@@ -1,0 +1,45 @@
+{% extends 'Shop/base.html' %}
+{% load static %}
+{% block title %}Buy Now{% endblock title %}
+{% block main-content %}
+<div class="container my-5">
+    <div class="row">
+        <!-- Sidebar Categories -->
+        <div class="col-sm-3">
+            <div class="list-group">
+                <a href="#" class="list-group-item list-group-item-action active" aria-current="true">All Lehenga </a>
+                <a href="{% url 'lehengaitem' 'pakija' %}" class="list-group-item
+                list-group-item-action"> pakija</a>
+                <a href="{% url 'lehengaitem' 'ponnoala' %}" class="list-group-item list-group-item-action">ponnoala</a>
+                <a href="{% url 'lehengaitem' 'above' %}" class="list-group-item
+                list-group-item-action"> above 1500</a>
+                <a href="{% url 'lehengaitem' 'below' %}" class="list-group-item list-group-item-action">below 1500 </a>
+            </div>
+        </div>
+
+        <!-- Products Grid -->
+        <div class="col-sm-9">
+            <div class="row">
+                {% for product in lehengas %}
+                    <div class="col-sm-4 text-center mb-4">
+                        <a href="{% url 'product-detail' product.id %}" class="btn text-decoration-none">
+                            <div class="card h-100">
+                                <img src="{{ product.product_image.url }}" class="card-img-top" alt="{{ product.title }}" height="300">
+                                <div class="card-body">
+                                    <h5 class="card-title fw-bold">{{ product.title }}</h5>
+                                    <p class="card-text">
+                                        <span class="fw-bold">Tk. {{ product.discounted_price }}</span>
+                                        <small class="text-decoration-line-through text-muted">{{ product.selling_price }}</small>
+                                    </p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                {% empty %}
+                    <p class="text-center">No products available.</p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock main-content %}
