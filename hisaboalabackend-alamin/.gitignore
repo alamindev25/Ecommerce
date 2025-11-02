@@ -1,0 +1,8 @@
+.env
+env*
+db.sqlite3
+*.pyc
+.idea/
+db.sqlite3
+.media
+media*

@@ -1,0 +1,169 @@
+/* Define color variables for easier management */
+:root {
+  --background-color: #f1f3f8;
+  --sidebar-bg: #1e1e2d;
+  --sidebar-text: white;
+  --sidebar-link-hover: #4a6581ff;
+  --sidebar-link-active: #495057;
+  --badge-bg: #17a2b8;
+  --top-navbar-bg: white;
+  --top-navbar-shadow: rgba(0, 0, 0, 0.05);
+  --card-shadow: rgba(0, 0, 0, 0.05);
+  --card-bg-primary-start: #007bff;
+  --card-bg-primary-end: #0056b3;
+  --card-bg-success-start: #28a745;
+  --card-bg-success-end: #1e7e34;
+  --card-bg-warning-start: #ffc107;
+  --card-bg-warning-end: #e0a800;
+  --card-bg-info-start: #17a2b8;
+  --card-bg-info-end: #117a8b;
+}
+
+/* Body Styling */
+body {
+  background-color: var(--background-color);
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 250px;
+  height: 100vh;
+  position: fixed;
+  background: var(--sidebar-bg);
+  color: var(--sidebar-text);
+  transition: all 0.3s;
+  z-index: 1040;
+  top: 0;
+  left: 0;
+  overflow-y: auto;
+}
+
+.sidebar.collapsed {
+  width: 70px;
+  overflow-x: hidden;
+}
+
+.sidebar .nav-link {
+  color: var(--sidebar-text);
+  font-size: 17px;
+  padding: 6px 8px;
+  border-radius: 7px;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+.sidebar .nav-link i {
+  min-width: 30px;
+  text-align: center;
+}
+
+.sidebar.collapsed .nav-link span,
+.sidebar.collapsed .sidebar-logo,
+.sidebar.collapsed form,
+.sidebar.collapsed p {
+  display: none !important;
+}
+
+.sidebar .nav-link:hover {
+  background-color: var(--sidebar-link-hover);
+}
+
+.sidebar .nav-link.active {
+  background-color: var(--sidebar-link-active);
+}
+
+.sidebar .badge {
+  font-size: 12px;
+  padding: 4px 8px;
+  border-radius: 50px;
+  background-color: var(--badge-bg);
+}
+
+/* Main Content */
+.main-content {
+  margin-left: 250px;
+  transition: margin-left 0.3s;
+}
+
+.main-content.collapsed {
+  margin-left: 70px;
+}
+
+/* Top Navbar */
+.top-navbar {
+  background: var(--top-navbar-bg);
+  box-shadow: 0 2px 10px var(--top-navbar-shadow);
+  height: 80px;
+  position: fixed;
+  width: 100%;
+  z-index: 1030;
+  padding-left: 250px;
+  transition: padding-left 0.3s;
+}
+
+.top-navbar.collapsed {
+  padding-left: 70px;
+}
+
+.top-navbar form {
+  width: 280px;
+  margin-left: auto;
+}
+
+.top-navbar form .form-control {
+  height: 32px;
+  font-size: 14px;
+}
+
+.sidebar img {
+  max-height: 30px;
+  max-width: 100%;
+}
+
+/* Responsive Sidebar */
+@media (max-width: 768px) {
+  .sidebar {
+    left: -250px;
+  }
+  .sidebar.show {
+    left: 0;
+  }
+  .main-content, .top-navbar {
+    margin-left: 0 !important;
+    padding-left: 0 !important;
+  }
+}
+
+/* Unique Card Design */
+.card-custom {
+  border: none;
+  border-radius: 1rem;
+  box-shadow: 0 10px 25px var(--card-shadow);
+  color: white;
+  padding: 20px;
+}
+
+.card-custom .icon {
+  font-size: 2.5rem;
+  opacity: 0.8;
+}
+
+/* Gradient Backgrounds for Cards */
+.bg-gradient-primary {
+  background: linear-gradient(135deg, var(--card-bg-primary-start), var(--card-bg-primary-end));
+}
+
+.bg-gradient-success {
+  background: linear-gradient(135deg, var(--card-bg-success-start), var(--card-bg-success-end));
+}
+
+.bg-gradient-warning {
+  background: linear-gradient(135deg, var(--card-bg-warning-start), var(--card-bg-warning-end));
+  color: #212529;
+}
+
+.bg-gradient-info {
+  background: linear-gradient(135deg, var(--card-bg-info-start), var(--card-bg-info-end));
+}
