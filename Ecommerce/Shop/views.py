@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from . models import Customer, Product, Cart, OrderPlaced
 from django.views import View
-from.forms import CustomerRegistrationForm
+from.forms import CustomerRegistrationForm,CustomerProfileForm
 from django.contrib import messages
 # Create your views here.
 class ProductView(View):
@@ -33,7 +33,9 @@ def profile(request):
  return render(request, 'Shop/profile.html')
 
 def address(request):
- return render(request, 'Shop/address.html')
+ add=Customer.objects.filter(user=request.user)
+ return render(request, 'Shop/address.html',{'add':add,'active':'btn-primary'})
+
 
 def orders(request):
  return render(request, 'Shop/orders.html')
@@ -70,8 +72,29 @@ class CustomerRegistrationView(View):
   else:
    return render(request, 'Shop/customerregistration.html',{'form':form})
   
-def profile(request):
- return render(request, 'Shop/profile.html')
+# def profile(request):
+#  return render(request, 'Shop/profile.html')
+
+class CustomerProfileView(View):
+ def get(self,request):
+  form=CustomerProfileForm()
+  return render(request, 'Shop/profile.html',{'form':form,'active':'btn-primary'})
+ 
+ 
+ def post(self, request):
+  form=CustomerProfileForm(request.POST)
+  if form.is_valid():
+   usr=request.user
+   name=form.cleaned_data['name']
+   division=form.cleaned_data['division']
+   district=form.cleaned_data['district']
+   thana=form.cleaned_data['thana']
+   villorroad=form.cleaned_data['villorroad']
+   zipcode=form.cleaned_data['zipcode']
+   reg=Customer(user=usr,name=name,division=division,district=district,thana=thana,villorroad=villorroad,zipcode=zipcode)
+   reg.save()
+   messages.success(request,'Congratulations profile updated successfully')
+  return render(request, 'Shop/profile.html',{'form':form,'active':'btn-primary'})
    
 def checkout(request):
  
